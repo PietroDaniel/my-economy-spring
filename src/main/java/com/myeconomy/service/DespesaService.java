@@ -1,20 +1,21 @@
 package com.myeconomy.service;
 
-import com.myeconomy.dto.DespesaRequest;
-import com.myeconomy.dto.DespesaResponse;
-import com.myeconomy.model.Despesa;
-import com.myeconomy.model.Usuario;
-import com.myeconomy.repository.DespesaRepository;
-import com.myeconomy.repository.UsuarioRepository;
+import java.time.YearMonth;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.YearMonth;
-import java.util.List;
-import java.util.stream.Collectors;
+import com.myeconomy.dto.DespesaRequest;
+import com.myeconomy.dto.DespesaResponse;
+import com.myeconomy.model.Despesa;
+import com.myeconomy.model.Usuario;
+import com.myeconomy.repository.DespesaRepository;
+import com.myeconomy.repository.UsuarioRepository;
 
 @Service
 public class DespesaService {
@@ -83,7 +84,7 @@ public class DespesaService {
     private Despesa buscarDespesaDoUsuario(Long id) {
         Usuario usuario = getUsuarioAutenticado();
         return despesaRepository.findById(id)
-            .filter(d -> d.getUsuario().getEmail().equals(usuario.getEmail()))
+            .filter(d -> d.getUsuario().getId().equals(usuario.getId()))
             .orElseThrow(() -> new IllegalArgumentException("Despesa não encontrada"));
     }
 

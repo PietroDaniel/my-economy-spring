@@ -1,20 +1,21 @@
 package com.myeconomy.service;
 
-import com.myeconomy.dto.LimiteMensalRequest;
-import com.myeconomy.dto.LimiteMensalResponse;
-import com.myeconomy.model.LimiteMensal;
-import com.myeconomy.model.Usuario;
-import com.myeconomy.repository.LimiteMensalRepository;
-import com.myeconomy.repository.UsuarioRepository;
+import java.time.YearMonth;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.YearMonth;
-import java.util.List;
-import java.util.stream.Collectors;
+import com.myeconomy.dto.LimiteMensalRequest;
+import com.myeconomy.dto.LimiteMensalResponse;
+import com.myeconomy.model.LimiteMensal;
+import com.myeconomy.model.Usuario;
+import com.myeconomy.repository.LimiteMensalRepository;
+import com.myeconomy.repository.UsuarioRepository;
 
 @Service
 public class LimiteMensalService {
@@ -94,7 +95,7 @@ public class LimiteMensalService {
     private LimiteMensal buscarLimiteDoUsuario(Long id) {
         Usuario usuario = getUsuarioAutenticado();
         return limiteMensalRepository.findById(id)
-            .filter(l -> l.getUsuario().getEmail().equals(usuario.getEmail()))
+            .filter(l -> l.getUsuario().getId().equals(usuario.getId()))
             .orElseThrow(() -> new IllegalArgumentException("Limite mensal não encontrado"));
     }
 

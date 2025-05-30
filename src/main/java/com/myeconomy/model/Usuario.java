@@ -1,11 +1,13 @@
 package com.myeconomy.model;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 import org.hibernate.annotations.CreationTimestamp;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Data;
@@ -16,7 +18,10 @@ import lombok.Data;
 public class Usuario {
     
     @Id
-    @Column(unique = true)
+    @GeneratedValue
+    private UUID id;
+    
+    @Column(unique = true, nullable = false)
     private String email;
     
     @Column(nullable = false)

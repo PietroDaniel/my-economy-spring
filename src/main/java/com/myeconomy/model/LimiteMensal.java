@@ -33,7 +33,7 @@ public class LimiteMensal {
     private YearMonth mesReferencia;
     
     @ManyToOne
-    @JoinColumn(name = "usuario_email", nullable = false)
+    @JoinColumn(name = "usuario_id", nullable = false)
     private Usuario usuario;
     
     @CreationTimestamp

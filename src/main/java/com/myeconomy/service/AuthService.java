@@ -1,12 +1,5 @@
 package com.myeconomy.service;
 
-import com.myeconomy.dto.JwtResponse;
-import com.myeconomy.dto.LoginRequest;
-import com.myeconomy.dto.SignupRequest;
-import com.myeconomy.model.Usuario;
-import com.myeconomy.repository.UsuarioRepository;
-import com.myeconomy.security.JwtService;
-import com.myeconomy.security.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -15,6 +8,14 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.myeconomy.dto.JwtResponse;
+import com.myeconomy.dto.LoginRequest;
+import com.myeconomy.dto.SignupRequest;
+import com.myeconomy.model.Usuario;
+import com.myeconomy.repository.UsuarioRepository;
+import com.myeconomy.security.JwtService;
+import com.myeconomy.security.UserDetailsImpl;
 
 @Service
 public class AuthService {
@@ -45,6 +46,7 @@ public class AuthService {
         return new JwtResponse(
             jwt,
             "Bearer",
+            userDetails.getId(),
             userDetails.getUsername(),
             userDetails.getNome(),
             userDetails.getDataNascimento()

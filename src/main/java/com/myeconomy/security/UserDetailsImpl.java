@@ -1,17 +1,20 @@
 package com.myeconomy.security;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.myeconomy.model.Usuario;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.UUID;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.myeconomy.model.Usuario;
 
 public class UserDetailsImpl implements UserDetails {
     private static final long serialVersionUID = 1L;
 
+    private UUID id;
     private String email;
     private String nome;
     @JsonIgnore
@@ -19,10 +22,15 @@ public class UserDetailsImpl implements UserDetails {
     private LocalDate dataNascimento;
 
     public UserDetailsImpl(Usuario usuario) {
+        this.id = usuario.getId();
         this.email = usuario.getEmail();
         this.nome = usuario.getNome();
         this.senha = usuario.getSenha();
         this.dataNascimento = usuario.getDataNascimento();
+    }
+
+    public UUID getId() {
+        return id;
     }
 
     @Override
